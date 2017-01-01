@@ -21,7 +21,7 @@ Information on the Trojan BitCoin Miner variant found
 rule BitCoinMiner_string {
 
 	strings:
-		$x1 = "{\"method\": \"login\", \"params\": {\"login\": \"%s\", \"pass\": \"%s\", \"agent\": \"cpuminer-multi/0.1\"}, \"id\": 1}" fullword ascii asci
+		$x1 = "{\"method\": \"login\", \"params\": {\"login\": \"%s\", \"pass\": \"%s\", \"agent\": \"cpuminer-multi/0.1\"}, \"id\": 1}" fullword ascii
 		$x2 = "-x, --proxy=[PROTOCOL://]HOST[:PORT]  connect through a proxy" fullword ascii
       		$s3 = "-t, --threads=N       number of miner threads (default: number of processors)" fullword ascii
       		$s4 = "{\"method\": \"submit\", \"params\": {\"id\": \"%s\", \"job_id\": \"%s\", \"nonce\": \"%s\", \"result\": \"%s\"}, \"id\":1}" fullword ascii
