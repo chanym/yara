@@ -27,11 +27,11 @@ rule adware_trojan_2 {
       $s1 = "Mozilla/4.0 (compatible; %s; %s; Rising)" fullword wide
       $s2 = "sservice.gamegogle.com" fullword wide
       $s3 = "dmscoree.dll" fullword wide
-      $s4 = "te.exe" fullword wide /* score: '18.00' */
-      $s5 = "*NanJing WanJuan Info Technology Co. , Ltd.0" fullword ascii /* score: '15.00' */
-      $s6 = "*NanJing WanJuan Info Technology Co. , Ltd.1(0&" fullword ascii /* score: '15.00' */
-  	  $s7 = ".?AVCHttpDownload@net@@" fullword ascii /* PEStudio Blacklist: strings */ /* score: '15.00' */
-      $s8 = "\\\\.\\IDE21201.VXD" fullword ascii /* score: '14.00' */
+      $s4 = "te.exe" fullword wide
+      $s5 = "*NanJing WanJuan Info Technology Co. , Ltd.0" fullword ascii
+      $s6 = "*NanJing WanJuan Info Technology Co. , Ltd.1(0&" fullword ascii
+      $s7 = ".?AVCHttpDownload@net@@" fullword ascii
+      $s8 = "\\\\.\\IDE21201.VXD" fullword ascii
    condition:
       ( uint16(0) == 0x5a4d and filesize < 900KB and ( 5 of ($s*) ) )
 }
