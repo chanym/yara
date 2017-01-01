@@ -1,7 +1,7 @@
 import "pe"
 
 /*
-	  text = "812AC176DAFCD7C2BDD4FE8F79FCA3A9"
+      text = "812AC176DAFCD7C2BDD4FE8F79FCA3A9"
       rdata = "26A301E1AE63F584717C3A28DAC6C0BF"
       data = "25B7235D58C6EB39E4BCEBC011C2DDEE"
       rsrc = "85DD056436B3C88DE3352DC085192816"
@@ -44,7 +44,7 @@ rule Wimmie_Addon_AntiDebug{
 }
 
 rule Wimmie_Addon_Export{
-	condition:
-		pe.exports("Fly")
+    condition:
+	 pe.exports("Fly")
 }
 		
