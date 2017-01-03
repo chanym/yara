@@ -47,6 +47,11 @@ rule BitCoinMiner_string {
 		uint16(0) == 0x5a4d and filesize < 3000KB and ( 1 of ($x*) and 5 of ($s*) ) 
 }
 
+rule BitCoinMiner_imphash{
+	condition:
+		pe.imphash() == "5937457735cd3db7e0587fb31737d1d4"
+}
+
 rule BitCoinMiner_Num_Of_Sections{
 
 	condition:
