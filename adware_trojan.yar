@@ -36,6 +36,12 @@ rule adware_trojan_2 {
       ( uint16(0) == 0x5a4d and filesize < 900KB and ( 5 of ($s*) ) )
 }
 
+rule adware_trojan_imphash {
+	condition:
+		pe.imphash() == "7660bc80e4b34737f0399fa55a8a649e" OR
+		pe.imphash() == "b86e9275759e9960ac457a686ea95561"
+}
+
 rule adware_trojan_AntiDebug {
 	condition:
 		pe.imports("KERNEL32.DLL", "GetTickCount") or
