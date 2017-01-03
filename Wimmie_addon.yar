@@ -13,6 +13,7 @@ rule Wimmie_Addon {
    meta:
       desc = "Beside '\x00ScriptMan', more specific strings are added on from yarGen specific string result"
       hash1 = "c9a0b4a65c9b9704a864cf25df931aaf"
+      imphash = "eaded5435cbe8e3e041e1a527a9437db"
       
 
    strings:
@@ -35,6 +36,11 @@ rule Wimmie_Addon {
 
    condition:
       ( uint16(0) == 0x5a4d and filesize < 4000KB and ( 5 of ($s*) ) )
+}
+
+rule Wimmie_Addon_imphash{
+    condition:
+    	 pe.imphash() == "eaded5435cbe8e3e041e1a527a9437db"
 }
 
 rule Wimmie_Addon_AntiDebug{
