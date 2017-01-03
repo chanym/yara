@@ -32,3 +32,10 @@ rule PUA_Downloader {
        	 pe.imports("KERNEL32.dll", "Sleep") and
        	 pe.imports("KERNEL32.dll", "IsDebuggerPresent")
 }
+
+rule PUA_Downloader_imphash {
+	condition:
+		pe.imphash() == "afcdf79be1557326c854b6e20cb900a7"
+}
+
+		
