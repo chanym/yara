@@ -35,6 +35,12 @@ rule SillyFDC_strings_found {
 
 }
 
+rule SillyFDC_imphash{
+     condition:
+         pe.imphash() == "0dc1eb84a5aed311d81e373106d02c9d"
+}
+
+
 rule SillyFDC_imports_and_functions{
     condition:
         pe.imports("msvbvm60.dll", "DllFunctionCall")
