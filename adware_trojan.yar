@@ -38,7 +38,7 @@ rule adware_trojan_2 {
 
 rule adware_trojan_imphash {
 	condition:
-		pe.imphash() == "7660bc80e4b34737f0399fa55a8a649e" OR
+		pe.imphash() == "7660bc80e4b34737f0399fa55a8a649e" or
 		pe.imphash() == "b86e9275759e9960ac457a686ea95561"
 }
 
