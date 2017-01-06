@@ -27,8 +27,7 @@ import "pe"
     
     condition:
          ( uint16(0) == 0x5a4d and filesize < 500KB and ( 2 of ($s*) ) ) and 
-         ( pe.exports("ServiceMain") or pe.exports("SvcControl") ) and 
-           pe.imphash() == "ec7486f6ba69c264b74568ae5af59b0c"
+         ( pe.exports("ServiceMain") or pe.exports("SvcControl") ) 
  }
 
 rule suspicious_mas_imphash{
