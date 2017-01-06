@@ -11,26 +11,13 @@ rule PUA_Downloader {
 			
 	strings:
 	 $s1 = "*Unable to get a list of running processes." fullword wide
-	 $s2 = "PROCESSGETSTATS" fullword wide
-       	 $s3 = "WINGETPROCESS" fullword wide
-       	 $s4 = "0Expected a \"=\" operator in assignment statement.*Invalid keyword at the start of this line." fullword wide
-       	 $s5 = "sScDKIwXVUyxfR0V/dEV+rpVCaf1iWC9+SHNACXRuX0VTL19HRXt0RX5RakJpRWJYL35Ic0BJdG5fRVMvX0dFo3RFfl91+GdF1lHiX/ByDIRVOjcsIA8vNSoc BiQTcQk" ascii
-       	 $s7 = "SCRIPTNAME" fullword wide
-       	 $s8 = "/AutoIt3ExecuteScript" fullword wide
-       	 $s9 = "/AutoIt3ExecuteLine" fullword wide
-       	 $s10 = "PROCESSSETPRIORITY" fullword wide
-       	 $s11 = "PROCESSWAITCLOSE" fullword wide
-       	 $s13 = "PROCESSCLOSE" fullword wide
-       	 $s14 = "PROCESSWAIT" fullword wide
-       	 $s15 = "PROCESSEXISTS" fullword wide
-       	 $s16 = "SHELLEXECUTEWAIT" fullword wide
-       	 $s17 = "PROCESSORARCH" fullword wide
-       	 $s18 = "PROCESSLIST" fullword wide
+       	 $s2 = "0Expected a \"=\" operator in assignment statement.*Invalid keyword at the start of this line." fullword wide
+       	 $s3 = "sScDKIwXVUyxfR0V/dEV+rpVCaf1iWC9+SHNACXRuX0VTL19HRXt0RX5RakJpRWJYL35Ic0BJdG5fRVMvX0dFo3RFfl91+GdF1lHiX/ByDIRVOjcsIA8vNSoc BiQTcQk" ascii
+       	 $s4 = "SCRIPTNAME" fullword wide
+       	 $s5 = "/AutoIt3ExecuteScript" fullword wide
        		
     	condition:
-       	 ( uint16(0) == 0x5a4d and filesize < 3000KB and ( 10 of ($s*) ) ) and
-       	 pe.imports("KERNEL32.dll", "Sleep") and
-       	 pe.imports("KERNEL32.dll", "IsDebuggerPresent")
+       	 uint16(0) == 0x5a4d and filesize < 3000KB and ( 10 of ($s*) )
 }
 
 rule PUA_Downloader_imphash {
