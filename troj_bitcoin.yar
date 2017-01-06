@@ -52,12 +52,6 @@ rule BitCoinMiner_imphash{
 		pe.imphash() == "5937457735cd3db7e0587fb31737d1d4"
 }
 
-rule BitCoinMiner_Num_Of_Sections{
-
-	condition:
-		pe.number_of_sections > 6 
-}
-
 rule BitCoinMiner_suspicious_imports_and_functions{
 	condition:
 		pe.imports("libcurl-4.dl1") and
