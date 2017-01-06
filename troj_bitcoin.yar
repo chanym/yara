@@ -58,11 +58,6 @@ rule BitCoinMiner_Num_Of_Sections{
 		pe.number_of_sections > 6 
 }
 
-rule BitCoinMiner_AntiDebug{
-	condition:
-		pe.imports("KERNEL32.DLL", "GetTickCount")
-}
-
 rule BitCoinMiner_suspicious_imports_and_functions{
 	condition:
 		pe.imports("libcurl-4.dl1") and
