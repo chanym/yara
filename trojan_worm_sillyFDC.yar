@@ -18,20 +18,19 @@ Information on the Trojan Worm SillyFDC
 rule SillyFDC_strings_found {
    
    strings:
-      $x1 = "C:\\temp.exe" fullword wide 
-      $x2 = "c:\\temp.exe" fullword wide
-      $x3 = "c:\\payload.exe" fullword ascii
-      $s1 = "C:\\Program Files\\Microsoft Visual Studio\\VB98\\VB6.OLB" fullword ascii
-      $s2 = "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\" fullword wide
-      $s3 = "c:\\loadme.txt" fullword wide
-      $s4 = "Converting exe to txt c:\\loadme.txt" fullword wide
-      $s5 = "VBA6.DLL" fullword ascii
+      $x1 = "C:\\temp.exe" nocase fullword wide 
+      $x2 = "c:\\payload.exe" nocase fullword ascii
+      $s1 = "C:\\Program Files\\Microsoft Visual Studio\\VB98\\VB6.OLB" nocase fullword ascii
+      $s2 = "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\" nocase fullword wide
+      $s3 = "c:\\loadme.txt" nocase fullword wide
+      $s4 = "Converting exe to txt c:\\loadme.txt" nocase fullword wide
+      $s5 = "VBA6.DLL" nocase fullword ascii
       $s6 = "http://198.173.124.107/setup.html" fullword wide
       $s7 = "getkeyval" fullword ascii
-      $s8 = "RS Caparros Payroll.exe" fullword wide
+      $s8 = "RS Caparros Payroll.exe" nocase fullword wide
    
    condition:
-      ( uint16(0) == 0x5a4d and filesize < 200KB and ( 1 of ($x*) and 5 of ($s*) ) ) or ( all of them )
+      uint16(0) == 0x5a4d and filesize < 200KB and ( 1 of ($x*) and 3 of ($s*) ) 
 
 }
 
@@ -44,16 +43,4 @@ rule SillyFDC_imphash{
 rule SillyFDC_imports_and_functions{
     condition:
         pe.imports("msvbvm60.dll", "DllFunctionCall")
-}
-
-
-rule Microsoft_Visual_Basic_v50_v60: PEiD
-{
-    strings:
-        $a = { 5A 68 68 52 E9 }
-        $b = { FF 25 ?? ?? ?? ?? ?? ?? 68 ?? ?? ?? ?? E8 ?? FF FF FF }
-        $c = { 68 ?? ?? ?? ?? E8 ?? ?? ?? ?? 00 00 ?? 00 00 00 30 ?? 00 }
-    
-    condition:
-        for any of ($*) : ( $ at pe.entry_point )
 }
