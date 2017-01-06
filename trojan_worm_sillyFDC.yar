@@ -20,14 +20,13 @@ rule SillyFDC_strings_found {
    strings:
       $x1 = "C:\\temp.exe" nocase fullword wide 
       $x2 = "c:\\payload.exe" nocase fullword ascii
-      $s1 = "C:\\Program Files\\Microsoft Visual Studio\\VB98\\VB6.OLB" nocase fullword ascii
-      $s2 = "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\" nocase fullword wide
-      $s3 = "c:\\loadme.txt" nocase fullword wide
-      $s4 = "Converting exe to txt c:\\loadme.txt" nocase fullword wide
-      $s5 = "VBA6.DLL" nocase fullword ascii
-      $s6 = "http://198.173.124.107/setup.html" fullword wide
-      $s7 = "getkeyval" fullword ascii
-      $s8 = "RS Caparros Payroll.exe" nocase fullword wide
+      $s1 = "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\" nocase fullword wide
+      $s2 = "c:\\loadme.txt" nocase fullword wide
+      $s3 = "Converting exe to txt c:\\loadme.txt" fullword wide
+      $s4 = "VBA6.DLL" nocase fullword ascii
+      $s5 = "http://198.173.124.107/setup.html" fullword wide
+      $s6 = "getkeyval" fullword ascii
+      $s7 = "RS Caparros Payroll.exe" nocase fullword wide
    
    condition:
       uint16(0) == 0x5a4d and filesize < 200KB and ( 1 of ($x*) and 3 of ($s*) ) 
