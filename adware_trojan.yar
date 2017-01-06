@@ -15,7 +15,7 @@ rule adware_trojan_1 {
   
     
    condition:
-      ( uint16(0) == 0x5a4d and filesize < 800KB and ( 5 of ($s*) ) )
+      ( uint16(0) == 0x5a4d and filesize < 800KB and ( 3 of ($s*) ) )
 }
 
 rule adware_trojan_2 {
@@ -29,21 +29,14 @@ rule adware_trojan_2 {
       $s3 = "dmscoree.dll" fullword wide
       $s4 = "te.exe" fullword wide
       $s5 = "*NanJing WanJuan Info Technology Co. , Ltd.0" fullword ascii
-      $s6 = "*NanJing WanJuan Info Technology Co. , Ltd.1(0&" fullword ascii
       $s7 = ".?AVCHttpDownload@net@@" fullword ascii
-      $s8 = "\\\\.\\IDE21201.VXD" fullword ascii
+      
    condition:
-      ( uint16(0) == 0x5a4d and filesize < 900KB and ( 5 of ($s*) ) )
+      uint16(0) == 0x5a4d and filesize < 900KB and ( 3 of ($s*) ) 
 }
 
-rule adware_trojan_imphash {
+rule adware_trojan_imphashes {
 	condition:
 		pe.imphash() == "7660bc80e4b34737f0399fa55a8a649e" or
 		pe.imphash() == "b86e9275759e9960ac457a686ea95561"
-}
-
-rule adware_trojan_AntiDebug {
-	condition:
-		pe.imports("KERNEL32.DLL", "GetTickCount") or
-		pe.imports("KERNEL32.DLL", "IsDebuggerPresent")
 }
