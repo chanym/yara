@@ -26,9 +26,8 @@ import "pe"
          $s3 = "Windows Authentication Service (formerly named NTLM, and also referred to as Windows  NT Challenge/Response authentication) is a " ascii 
     
     condition:
-         ( uint16(0) == 0x5a4d and filesize < 500KB and ( all of ($s*) ) ) and 
-           pe.exports("ServiceMain") and 
-           pe.exports("SvcControl") and 
+         ( uint16(0) == 0x5a4d and filesize < 500KB and ( 2 of ($s*) ) ) and 
+         ( pe.exports("ServiceMain") or pe.exports("SvcControl") ) and 
            pe.imphash() == "ec7486f6ba69c264b74568ae5af59b0c"
  }
 
@@ -36,11 +35,4 @@ rule suspicious_mas_imphash{
      condition:
          pe.imphash() == "ec7486f6ba69c264b74568ae5af59b0c"
  }
- 
- rule suspicious_mas_antiDebug{
- 
-     condition:
-         pe.imports("KERNEL32.DLL", "GetTickCount") and
-         pe.imports("KERNEL32.DLL", "IsDebuggerPresent")
- 
- }
+
