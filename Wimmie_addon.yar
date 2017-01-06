@@ -35,18 +35,12 @@ rule Wimmie_Addon {
       $s16 = "\\zlibwapi.dll" fullword wide
 
    condition:
-      ( uint16(0) == 0x5a4d and filesize < 4000KB and ( 5 of ($s*) ) )
+      uint16(0) == 0x5a4d and filesize < 4000KB and ( 3 of ($s*) )
 }
 
 rule Wimmie_Addon_imphash{
     condition:
     	 pe.imphash() == "eaded5435cbe8e3e041e1a527a9437db"
-}
-
-rule Wimmie_Addon_AntiDebug{
-    condition:
-         pe.imports("KERNEL32.DLL", "GetTickCount") and
-         pe.imports("KERNEL32.DLL", "IsDebuggerPresent")
 }
 
 rule Wimmie_Addon_Export{
