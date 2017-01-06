@@ -61,6 +61,6 @@ rule BitCoinMiner_Num_Of_Sections{
 rule BitCoinMiner_suspicious_imports_and_functions{
 	condition:
 		pe.imports("libcurl-4.dl1") and
-		pe.imports("libwinpthread-1.dl1") and
+		pe.imports("libwinpthread-1.dl1")
 }
 
